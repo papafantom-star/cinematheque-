@@ -30,7 +30,7 @@ const EMPTY_MSG = {
 }
 
 export default function App() {
-  const { session, loading: authLoading, login, logout, isAdmin } = useAuth()
+  const {loading: authLoading, login, logout, isAdmin } = useAuth()
   const { db, loading, addMovie, removeMovie, moveMovie, updateNote, updateCritique, updateRewatch } = useMovies()
   const { query, setQuery, results, setResults } = useTMDB()
 
