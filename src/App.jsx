@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react'
 import Header from './components/Header'
 import SearchBar from './components/SearchBar'
