@@ -20,45 +20,50 @@ export default function Header({ activeTab, onTabChange, isAdmin, onLogin, onLog
   ]
 
   return (
-    <header className="sticky top-0 z-40 flex items-center justify-between px-8 h-16"
+    <header className="sticky top-0 z-40"
       style={{ background: 'rgba(10,10,15,0.88)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
 
-      <div className="flex items-center gap-2">
-        <img src="logo.png" alt="logo" className="h-8 w-auto" />
-        <span className="text-xl" style={{ fontFamily: 'Playfair Display, serif', color: 'var(--gold)' }}>
-          Ma <span style={{ fontStyle: 'italic', color: 'var(--text)' }}>Cinémathèque</span>
-        </span>
+      {/* Ligne 1 : logo + titre + bouton admin */}
+      <div className="flex items-center justify-between px-4 md:px-8 h-14">
+        <div className="flex items-center gap-2">
+          <img src="logo.png" alt="logo" className="h-8 w-auto" />
+          <span className="text-lg md:text-xl" style={{ fontFamily: 'Playfair Display, serif', color: 'var(--gold)' }}>
+            Ma <span style={{ fontStyle: 'italic', color: 'var(--text)' }}>Cinémathèque</span>
+          </span>
+        </div>
+
+        <div className="relative" ref={panelRef}>
+          <button onClick={() => setShowAuth(v => !v)}
+            className="px-3 py-1.5 rounded-lg text-xs transition"
+            style={{
+              background: 'var(--surface2)',
+              border: isAdmin ? '1px solid var(--gold)' : '1px solid rgba(255,255,255,0.07)',
+              color: isAdmin ? 'var(--gold)' : 'var(--text-muted)',
+              fontFamily: 'DM Sans, sans-serif', cursor: 'pointer'
+            }}>
+            {isAdmin ? '✅ Admin' : '🔒 Admin'}
+          </button>
+
+          {showAuth && (
+            <AuthPanel isAdmin={isAdmin} onLogin={onLogin} onLogout={onLogout} onClose={() => setShowAuth(false)} />
+          )}
+        </div>
       </div>
 
-      <div className="flex items-center gap-2 ml-auto relative" ref={panelRef}>
-        <nav className="flex gap-1">
-          {tabs.map(t => (
-            <button key={t.key} onClick={() => onTabChange(t.key)}
-              className="px-3 py-2 rounded-md text-xs uppercase tracking-widest transition"
-              style={{
-                background: activeTab === t.key ? 'var(--gold-dim)' : 'transparent',
-                color: activeTab === t.key ? 'var(--gold)' : 'var(--text-muted)',
-                border: 'none', cursor: 'pointer', fontFamily: 'DM Sans, sans-serif'
-              }}>
-              {t.label}
-            </button>
-          ))}
-        </nav>
-
-        <button onClick={() => setShowAuth(v => !v)}
-          className="px-3 py-1.5 rounded-lg text-xs transition"
-          style={{
-            background: 'var(--surface2)',
-            border: isAdmin ? '1px solid var(--gold)' : '1px solid rgba(255,255,255,0.07)',
-            color: isAdmin ? 'var(--gold)' : 'var(--text-muted)',
-            fontFamily: 'DM Sans, sans-serif', cursor: 'pointer'
-          }}>
-          {isAdmin ? '✅ Admin' : '🔒 Admin'}
-        </button>
-
-        {showAuth && (
-          <AuthPanel isAdmin={isAdmin} onLogin={onLogin} onLogout={onLogout} onClose={() => setShowAuth(false)} />
-        )}
+      {/* Ligne 2 : onglets (toujours visibles, scrollables sur mobile) */}
+      <div className="flex overflow-x-auto px-4 md:px-8 pb-2 gap-1"
+        style={{ scrollbarWidth: 'none' }}>
+        {tabs.map(t => (
+          <button key={t.key} onClick={() => onTabChange(t.key)}
+            className="flex-shrink-0 px-4 py-1.5 rounded-md text-xs uppercase tracking-widest transition whitespace-nowrap"
+            style={{
+              background: activeTab === t.key ? 'var(--gold-dim)' : 'transparent',
+              color: activeTab === t.key ? 'var(--gold)' : 'var(--text-muted)',
+              border: 'none', cursor: 'pointer', fontFamily: 'DM Sans, sans-serif'
+            }}>
+            {t.label}
+          </button>
+        ))}
       </div>
     </header>
   )
