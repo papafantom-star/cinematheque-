@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect, useRef } from 'react'
 
 const TMDB_KEY = 'c8165e84c9231df28515e0ef5e0b10a9'
