@@ -16,7 +16,7 @@ export function useTMDB() {
     return () => clearTimeout(timer.current)
   }, [query])
 
- async function search(q) {
+  async function search(q) {
   setSearching(true)
   try {
     // Si l'utilisateur tape "id:12598" on cherche directement par ID
@@ -61,4 +61,4 @@ export function useTMDB() {
     setResults([])
   }
   setSearching(false)
-}
+}}
