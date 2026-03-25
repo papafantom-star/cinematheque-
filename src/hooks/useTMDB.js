@@ -62,4 +62,4 @@ export function useTMDB() {
     setResults([])
   }
   setSearching(false)
-}}
+}
