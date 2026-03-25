@@ -35,7 +35,7 @@ export default function Header({ activeTab, onTabChange, isAdmin, onLogin, onLog
       </div>
 
       {/* Onglets — poussés au centre/droite sur desktop */}
-      <div className="flex overflow-x-auto gap-1 flex-1 md:justify-end"
+      <div className="hidden md:flex overflow-x-auto gap-1 flex-1 md:justify-end"
         style={{ scrollbarWidth: 'none' }}>
         {tabs.map(t => (
           <button key={t.key} onClick={() => onTabChange(t.key)}
